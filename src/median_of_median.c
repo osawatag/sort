@@ -38,45 +38,17 @@ for(i = 0; i < n; i++){ //AA[]にA[]をコピー
   AA[i] = A[i];
 }
 l = n;
-while(l > 5){ //A[]の長さが5以下になるまで再起
   for(i = j = 0; 5*i <= l-5 ;i++){
   AA[i] = quick_select(AA+5*i,5,2);
     j++;
 }
-    if(l % 5 == 1){  //以下場合分けはAA[]を５で分けた後の最後に残った５以下の配列の数に合わせて中央値を変えている
-      AA[j] = quick_select(AA+5*j,1,0);
+    if(l % 5 != 0){
+      AA[j] = quick_select(AA+5*j, l % 5, l % 10);
       l = j + 1;
-    }
-    else if(l % 5 == 2){
-      AA[j] = quick_select(AA+5*j,2,0);
-      l = j + 1;
-    }
-    else if(l % 5 == 3){
-      AA[j] = quick_select(AA+5*j,3,1);
-      l = j + 1;
-    }
-    else if(l % 5 == 4){
-      AA[j] = quick_select(AA+5*j,4,1);
-      l = j + 1;
-    }
-  l = j;
 }
-if(l % 5 == 1){//以下場合分けも同様、配列の数に合わせて中央値を出している
-  return quick_select(AA,1,0);
+    else l = j;
+return quick_select(AA, l, l/2);
 }
-else if(l % 5 == 2){
-  return quick_select(AA,2,0);
-}
-else if(l % 5 == 3){
-  return quick_select(AA,3,1);
-}
-else if(l % 5 == 4){
-  return quick_select(AA,4,1);
-}
-else
-  return quick_select(AA,5,2);
-}
-
 
 int median_of_median(int A[], int n, int k){
   int i, j, l, pivot;
